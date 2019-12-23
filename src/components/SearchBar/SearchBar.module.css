@@ -1,0 +1,23 @@
+.root {
+  margin: 8px;
+}
+
+.rootInner {
+  display: flex;
+  padding: 4px;
+}
+
+.input {
+  flex: 1;
+  margin-bottom: 8px;
+}
+
+.submitWrapper {
+  position: relative;
+}
+
+.submitProgress {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+}
