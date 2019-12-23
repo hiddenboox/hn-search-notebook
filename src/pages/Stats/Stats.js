@@ -21,12 +21,12 @@ export default function Stats() {
   const list = Object
     .entries(queries)
     .reduce((acc, [queryText, query]) => {
-        const averageHitsOfLastDay = query
+        const queriesOfLastDay = query
         .filter(({ createdAt }) => dayjs(createdAt).isSame(dayjs(), 'day'))
-        .reduce((acc, next) => acc += next.nbHits, 0)
-        const averageHitsOfLastWeek = query
+        const averageHitsOfLastDay = queriesOfLastDay.reduce((acc, next) => acc += next.nbHits, 0) / queriesOfLastDay.length
+        const queriesOfLastWeek = query
           .filter(({ createdAt }) => dayjs(createdAt).isBetween(dayjs().subtract(7, 'day'), dayjs(), 'day', '['))
-          .reduce((acc, next) => acc += next.nbHits, 0)
+        const averageHitsOfLastWeek = queriesOfLastWeek.reduce((acc, next) => acc += next.nbHits, 0) / queriesOfLastWeek.length
       return acc.concat({ query: queryText, averageHitsOfLastDay, averageHitsOfLastWeek })
     }, [])
 
