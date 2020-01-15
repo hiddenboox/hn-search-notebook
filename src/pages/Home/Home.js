@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { HackerNewsSearch } from '../../components/HackerNewsSearch'
 import { SelectableHackerNewsSearchResultList } from '../../components/HackerNewsSearchResultList'
 import { Pagination } from '../../components/Pagination'
-import { AddNotebook } from '../../components/AddNotebook'
+import { HomeActions } from '../../components/HomeActions'
 import { SearchQueryModel } from '../../state/storage'
 
 const initialOptions = {
@@ -69,7 +69,7 @@ export default function Home() {
           }}
         />
       ) : null}
-      <AddNotebook searchResults={selectedSearchResults} />
+      <HomeActions searchResults={selectedSearchResults} />
     </>
   )
 }

@@ -1,19 +1,18 @@
 import React from 'react'
-import Zoom from '@material-ui/core/Zoom'
-import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import { useHistory } from 'react-router-dom'
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 
 import { AddNotebookDialog } from './AddNotebookDialog'
 import { SearchNotebookModel } from '../../state/storage'
+import { noop } from '../../utils'
 
-import styles from './AddNotebook.module.css'
-
-export default function AddNotebook({ searchResults, query }) {
+export default function AddNotebook({ searchResults, query, onClick, ...props }) {
   const [open, setOpen] = React.useState(false)
   const history = useHistory()
 
   function toggleDialog() {
+    onClick()
     setOpen(open => !open)
   }
 
@@ -25,19 +24,18 @@ export default function AddNotebook({ searchResults, query }) {
 
   return (
     <>
-      <Zoom
-        in={searchResults.length > 0}
-        unmountOnExit
-      >
-        <Fab className={styles.root} onClick={toggleDialog}>
-          <AddIcon />
-        </Fab>
-      </Zoom>
+      <SpeedDialAction
+        icon={<AddIcon />}
+        tooltipTitle="Create new notebook"
+        onClick={toggleDialog}
+        {...props}
+      />
       <AddNotebookDialog open={open} onCancel={toggleDialog} onSuccess={onSuccess} />
     </>
   )
 }
 
 AddNotebook.defaultProps = {
-  searchResults: []
+  searchResults: [],
+  onClick: noop,
 }
